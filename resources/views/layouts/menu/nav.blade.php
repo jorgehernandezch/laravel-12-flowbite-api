@@ -66,7 +66,7 @@
                 </div>
                 <div>
                     <a class="flex border-b px-4 py-3 hover:bg-gray-100" href="#">
-                        <div class="flex-shrink-0">
+                        <div class="shrink-0">
                             <img
                                 class="h-11 w-11 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"

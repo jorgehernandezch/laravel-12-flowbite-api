@@ -31,7 +31,7 @@
             <x-sidebar.item
                 route="app.index" 
                 item="Dashboard"
-                class="{{ $segment == 'app' ? 'bg-gradient-to-l from-sky-400 via-sky-500 to-sky-600 text-white hover:bg-gradient-to-br ' : '' }}"
+                class="{{ $segment == 'app' ? 'bg-linear-to-l from-sky-400 via-sky-500 to-sky-600 text-white hover:bg-linear-to-br ' : '' }}"
             >
                 <i class="fa-solid fa-chart-pie"></i>
             </x-sidebar.item>
@@ -40,7 +40,7 @@
             {{-- <x-sidebar.item 
                 route="app.index"
                 item="Users" 
-                class="{{ $segment == 'users' ? 'bg-gradient-to-l from-sky-400 via-sky-500 to-sky-600 text-white hover:bg-gradient-to-br' : '' }}"
+                class="{{ $segment == 'users' ? 'bg-linear-to-l from-sky-400 via-sky-500 to-sky-600 text-white hover:bg-linear-to-br' : '' }}"
             >
                 <i class="fa-solid fa-person-circle-check"></i>
             </x-sidebar.item> --}}
