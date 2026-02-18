@@ -1,9 +1,15 @@
 @import "tailwindcss";
 
+/* Los plugins van aquí, sin llaves */
+@plugin "@tailwindcss/forms";
+@plugin "flowbite/plugin";
+
+@source "../views/**/*.blade.php";
+@source "../js/**/*.js";
+@source "../../node_modules/flowbite/**/*.js";
+
 @theme {
     --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
 }
 
-@plugin "@tailwindcss/forms";
-@plugin "flowbite/plugin";
 
