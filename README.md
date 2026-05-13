@@ -10,7 +10,7 @@ A modern RESTful API built with Laravel 12, featuring Flowbite components, Tailw
 - **Flowbite** - Tailwind CSS component library
 - **MySQL 8.0** - Relational database
 - **Docker & Laravel Sail** - Containerized development environment
-- **PHP 8.3** - Server-side scripting language
+- **PHP 8.4** - Server-side scripting language
 
 ## 📋 Prerequisites
 
@@ -144,19 +144,26 @@ You can test them using tools such as **Postman** or **cURL**.
 The `tailwind.config.js` file is configured to scan Laravel Blade files:
 
 ```javascript
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+import flowbitePlugin from 'flowbite/plugin';
+
 export default {
   content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-    "./node_modules/flowbite/**/*.js"
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+    './storage/framework/views/*.php',
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
+  plugins: [forms, flowbitePlugin],
 }
 ```
 
