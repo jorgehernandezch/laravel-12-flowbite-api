@@ -15,13 +15,20 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="antialiased bg-gray-500 h-screen">
+    <body class="min-h-screen font-sans antialiased text-slate-100">
+        <div class="relative min-h-screen overflow-hidden bg-slate-950">
+            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.18),transparent_32%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_28%),linear-gradient(180deg,#020617_0%,#0f172a_48%,#e2e8f0_100%)]"></div>
+            <div class="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-sky-500/20 blur-3xl"></div>
+            <div class="pointer-events-none absolute right-0 top-40 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl"></div>
             @include('layouts.menu.nav')
             @include('layouts.menu.sidebar')
-            <main class="md:ml-64 min-h-full h-full pt-16 bg-gray-100">
-                <div class="overflow-y-scroll bg-gray-100 p-4">
-                    {{ $slot }}
+            <main class="relative min-h-screen pt-20 md:pl-72">
+                <div class="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+                    <div class="rounded-4xl border border-white/10 bg-white/90 p-4 shadow-2xl shadow-slate-950/20 backdrop-blur sm:p-6">
+                        <div class="min-h-[calc(100vh-7rem)] rounded-3xl bg-slate-50 p-4 text-slate-900 sm:p-6">
+                            {{ $slot }}
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

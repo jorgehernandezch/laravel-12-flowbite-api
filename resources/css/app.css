@@ -1,3 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+
+@theme {
+	--font-sans: "Montserrat", "Roboto", sans-serif;
+	--color-brand-50: #eff6ff;
+	--color-brand-100: #dbeafe;
+	--color-brand-500: #0ea5e9;
+	--color-brand-600: #0284c7;
+	--color-brand-700: #0369a1;
+}
+
+html {
+	color-scheme: light;
+}
+
+body {
+	@apply bg-slate-100 text-slate-900 antialiased;
+}

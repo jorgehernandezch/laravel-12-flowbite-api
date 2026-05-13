@@ -1,33 +1,34 @@
-<nav class="fixed left-0 right-0 top-0 z-50 px-5 py-2.5 bg-gray-800">
-    <div class="flex flex-wrap items-center justify-between">
-        <div class="flex items-center justify-start">
+<nav class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
+    <div class="mx-auto flex h-16 max-w-screen-2xl flex-wrap items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3">
             {{-- Toggle Sidebar --}}
             <button data-drawer-target="drawer-navigation"
                 data-drawer-toggle="drawer-navigation"
                 aria-controls="drawer-navigation"
-                class="mr-2 cursor-pointer rounded-lg p-2 text-gray-600 hover:text-gray-100 focus:ring-2 focus:ring-gray-600 md:hidden"
+                class="inline-flex cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2.5 text-slate-300 transition hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-sky-500 md:hidden"
             >
                 <i class="fa-solid fa-bars"></i>
                 <span class="sr-only">Toggle sidebar</span>
             </button>
             {{-- Logotipo --}}
-            <a href="" class="flex items-center justify-between mr-4">
-                <img
-                    src="https://flowbite.s3.amazonaws.com/logo.svg"
-                    class="mr-3 h-8"
-                    alt="Flowbite Logo"
-                />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Flowbite</span>
+            <a href="{{ route('app.index') }}" class="flex items-center gap-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-linear-to-br from-sky-500 to-cyan-400 text-sm font-bold text-white shadow-lg shadow-sky-500/30">
+                    L
+                </span>
+                <div class="hidden sm:block">
+                    <span class="block text-sm font-semibold text-white">{{ config('app.name', 'Laravel') }}</span>
+                    <span class="block text-xs text-slate-400">Laravel 12 starter</span>
+                </div>
             </a>
             {{-- Search --}}
-            <form class="hidden md:block md:pl-2" action="#" method="GET">
+            <form class="hidden lg:block lg:pl-2" action="#" method="GET">
                 <label class="sr-only" for="topbar-search">Search</label>
-                <div class="relative sm:w-64 md:w-96">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <div class="relative w-104 max-w-full">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input
-                        class="focus:ring-primary-500 focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 h-8"
+                        class="block h-11 w-full rounded-2xl border border-white/10 bg-white/5 pl-10 text-sm text-white placeholder:text-slate-400 focus:border-sky-500 focus:bg-white/10 focus:ring-2 focus:ring-sky-500/30"
                         id="topbar-search"
                         name="email"
                         type="text"
@@ -36,11 +37,11 @@
                 </div>
             </form>
         </div>
-        <div class="flex items-center lg:order-2">
+        <div class="flex items-center gap-2 lg:order-2">
             {{-- Search mobile --}}
             <button 
                 type="button"
-                class="mr-1 rounded-lg p-2 text-gray-600 hover:text-gray-100 focus:ring-2 focus:ring-gray-600 md:hidden"
+                class="inline-flex rounded-xl border border-white/10 bg-white/5 p-2.5 text-slate-300 transition hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-sky-500 lg:hidden"
                 data-drawer-toggle="drawer-navigation"
                 aria-controls="drawer-navigation"
             >
@@ -49,7 +50,7 @@
             </button>
             <!-- Notifications -->
             <button
-                class="mr-1 rounded-lg p-2 text-gray-600 hover:text-gray-100 focus:ring-2 focus:ring-gray-600 "
+                class="inline-flex rounded-xl border border-white/10 bg-white/5 p-2.5 text-slate-300 transition hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-sky-500"
                 data-dropdown-toggle="notification-dropdown"
                 type="button"
             >
@@ -59,14 +60,14 @@
             <!-- Dropdown menu -->
             <div 
                 id="notification-dropdown"
-                class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded-xl bg-white text-base shadow-lg"
+                class="z-50 my-4 hidden max-w-sm list-none divide-y divide-slate-800 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 text-base shadow-2xl shadow-slate-950/60"
             >
-                <div class="block bg-gray-50 px-4 py-2 text-center text-base font-medium text-gray-700 ">
+                <div class="block bg-white/5 px-4 py-3 text-center text-sm font-medium tracking-wide text-slate-200">
                     Notifications
                 </div>
                 <div>
-                    <a class="flex border-b px-4 py-3 hover:bg-gray-100" href="#">
-                        <div class="flex-shrink-0">
+                    <a class="flex border-b border-slate-800 px-4 py-3 transition hover:bg-white/5" href="#">
+                        <div class="shrink-0">
                             <img
                                 class="h-11 w-11 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
@@ -85,7 +86,7 @@
                         </div>
                     </a>
                 </div>
-                <a class="text-md block bg-gray-50 py-2 text-center font-medium text-gray-900 hover:bg-gray-100" href="{{ route('app.notifications') }}">
+                <a class="text-md block bg-white/5 py-3 text-center font-medium text-white transition hover:bg-white/10" href="{{ route('app.notifications') }}">
                     <div class="inline-flex items-center">
                         <i class="fa-solid fa-eye"></i>
                         View all
@@ -108,29 +109,29 @@
             </button>
             <!-- Dropdown menu -->
             <div
-                class="z-50 my-4 hidden w-56 list-none divide-y divide-gray-100 rounded-xl bg-white text-base shadow"
+                class="z-50 my-4 hidden w-64 list-none divide-y divide-slate-800 rounded-2xl border border-slate-800 bg-slate-950 text-base shadow-2xl shadow-slate-950/60"
                 id="dropdown"
             >
                 <div class="px-4 py-3">
-                    <span class="block text-sm font-semibold text-gray-900">{{ auth()->user()->name }}</span>
-                    <span class="block truncate text-sm text-gray-900">{{ auth()->user()->email }}</span>
+                    <span class="block text-sm font-semibold text-white">{{ auth()->user()->name }}</span>
+                    <span class="block truncate text-sm text-slate-400">{{ auth()->user()->email }}</span>
                 </div>
-                <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
+                <ul class="py-1 text-slate-300" aria-labelledby="dropdown">
                     <li>
-                        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="{{ route('app.profile') }}">
+                        <a class="block px-4 py-2 text-sm transition hover:bg-white/5 hover:text-white" href="{{ route('app.profile') }}">
                             My profile
                         </a>
                     </li>
                     <li>
-                        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="{{ route('app.settings') }}">
+                        <a class="block px-4 py-2 text-sm transition hover:bg-white/5 hover:text-white" href="{{ route('app.settings') }}">
                             Configurations
                         </a>
                     </li>
                 </ul>
-                <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
+                <ul class="py-1 text-slate-300" aria-labelledby="dropdown">
                     <li>
                         <form 
-                            class="block px-4 py-2 text-sm hover:bg-gray-100" 
+                            class="block px-4 py-2 text-sm transition hover:bg-white/5 hover:text-white" 
                             action="{{ route('app.logout') }}"
                             method="POST"
                         >
