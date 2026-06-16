@@ -1,13 +1,13 @@
-# Laravel 12 API with Flowbite & Tailwind CSS
+# Quintau API Backend
 
-A modern RESTful API built with Laravel 12, featuring Flowbite components, Tailwind CSS for styling, and Laravel Sanctum for API authentication. This project includes Docker support through Laravel Sail for easy development and deployment.
+A modern backend built with Laravel 12, Sanctum, Flowbite and Tailwind CSS 4 for the Quintau project. The repository includes Docker support through Laravel Sail for local development and deployment.
 
 ## 🚀 Tech Stack
 
-- **Laravel 12** - PHP web application framework
-- **Laravel Sanctum** - API token authentication
-- **Tailwind CSS 3.x** - Utility-first CSS framework
-- **Flowbite** - Tailwind CSS component library
+- **Laravel 12** - PHP application framework
+- **Laravel Sanctum 4.x** - API token authentication
+- **Tailwind CSS 4.x** - Utility-first CSS framework
+- **Flowbite 4.x** - Tailwind CSS component library
 - **MySQL 8.0** - Relational database
 - **Docker & Laravel Sail** - Containerized development environment
 - **PHP 8.4** - Server-side scripting language
@@ -24,8 +24,8 @@ A modern RESTful API built with Laravel 12, featuring Flowbite components, Tailw
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/jorgehernandezch/laravel-12-flowbite-api
-cd laravel-12-flowbite-api
+git clone <repository-url>
+cd api-backend
 ```
 
 2. Copy environment file:
@@ -82,11 +82,8 @@ sail npm run dev
 
 Laravel Sail provides a Docker-based development environment with the following services:
 
-- **PHP 8.3** with FPM
+- **PHP 8.4** with FPM
 - **MySQL 8.0**
-- **Redis**
-- **Mailpit** (for email testing)
-- **Minio** (for S3-compatible storage)
 
 ### Sail Commands
 
@@ -141,29 +138,21 @@ You can test them using tools such as **Postman** or **cURL**.
 
 ### Tailwind CSS Configuration
 
-The `tailwind.config.js` file is configured to scan Laravel Blade files:
+Tailwind CSS 4 is configured through `resources/css/app.css` and `vite.config.js`:
 
-```javascript
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-import flowbitePlugin from 'flowbite/plugin';
+```css
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
 
-export default {
-  content: [
-    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-    './storage/framework/views/*.php',
-    './resources/**/*.blade.php',
-    './resources/**/*.js',
-    './node_modules/flowbite/**/*.js'
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-      },
-    },
-  },
-  plugins: [forms, flowbitePlugin],
+@theme {
+	--font-sans: "Montserrat", "Roboto", sans-serif;
+	--color-brand-50: #eff6ff;
+	--color-brand-100: #dbeafe;
+	--color-brand-500: #0ea5e9;
+	--color-brand-600: #0284c7;
+	--color-brand-700: #0369a1;
 }
 ```
 
@@ -172,7 +161,7 @@ export default {
 Flowbite provides pre-built Tailwind CSS components. Include in your layout:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 ```
 
 Or use the npm package (recommended):
@@ -198,7 +187,6 @@ sail artisan cache:clear       # Clear application cache
 ```bash
 sail npm run dev              # Development build with HMR
 sail npm run build            # Production build
-sail npm run watch            # Watch for changes
 ```
 
 ## 📁 Project Structure
@@ -233,7 +221,7 @@ sail npm run watch            # Watch for changes
 ├── storage/                  # Storage files
 ├── tests/                    # PHPUnit tests
 ├── docker-compose.yml        # Sail Docker configuration
-├── tailwind.config.js        # Tailwind configuration
+├── postcss.config.js         # Tailwind 4 / PostCSS configuration
 ├── vite.config.js            # Vite configuration
 ├── composer.json             # PHP dependencies
 └── package.json              # Node dependencies
@@ -244,27 +232,23 @@ sail npm run watch            # Watch for changes
 Key environment variables in `.env`:
 
 ```env
-APP_NAME=Laravel
+APP_NAME=Quintau
 APP_ENV=local
 APP_KEY=base64:...
 APP_DEBUG=true
-APP_URL=http://localhost
+APP_URL=http://localhost:8024
 
 DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=laravel
+DB_HOST=host.docker.internal
+DB_PORT=3324
+DB_DATABASE=quintau_api
 DB_USERNAME=sail
 DB_PASSWORD=password
 
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
 SANCTUM_STATEFUL_DOMAINS=localhost,127.0.0.1
-SESSION_DRIVER=redis
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
+SESSION_DRIVER=database
+CACHE_STORE=database
+QUEUE_CONNECTION=database
 ```
 
 ## 🔒 Security Best Practices
@@ -318,4 +302,4 @@ For questions or issues, please contact the development team or open an issue in
 _Engineer and Web Developer_
 
 ---
-Built with ❤️ using Laravel, Sanctum, Tailwind CSS, and Flowbite
+Built with Laravel 12, Sanctum, Tailwind CSS 4, and Flowbite 4

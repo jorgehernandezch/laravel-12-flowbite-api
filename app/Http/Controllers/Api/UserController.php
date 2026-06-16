@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         try {
             $user = $request->user();
-            $user->update(['is_active' => false]);
+            $user->forceFill(['is_active' => false])->save();
 
             return ApiResponse::success('Account deactivated successfully', 200);
         } catch (\Exception $e) {

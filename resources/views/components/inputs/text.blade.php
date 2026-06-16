@@ -1,3 +1,5 @@
+@props(['type' => 'text'])
+
 <div class="{{ $styles }} mb-2 px-1">
     <label for="{{ $name }}" class="block mb-2 text-sm font-medium text-gray-900 font-monserrat">
         {{ $label }} <span class="text-red-700">{{ $required ? '*' : '' }}</span>
@@ -10,7 +12,7 @@
             <i class="fa-solid {{ $icon }} {{ $errors?->first($name) ? 'text-red-600':'text-gray-500'}}"></i>
         </span>
         <input 
-            type="text"
+            type="{{ $type }}"
             name="{{ $name }}"
             id="{{ $name }}"
             class="font-monserrat font-medium placeholder:font-monserrat placeholder:font-normal placeholder:text-gray-400 rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 {{ $errors?->first($name) ? 'border-red-400' : 'border-gray-300' }}"

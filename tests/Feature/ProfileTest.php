@@ -1,85 +1,68 @@
 <?php
 
 use App\Models\User;
+use App\Models\Profile;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
+
+uses(RefreshDatabase::class);
 
 test('profile page is displayed', function () {
     $user = User::factory()->create();
 
     $response = $this
         ->actingAs($user)
-        ->get('/profile');
+        ->get(route('app.profile', absolute: false));
 
     $response->assertOk();
 });
 
-test('profile information can be updated', function () {
+test('basic info can be updated via api', function () {
     $user = User::factory()->create();
+    $originalEmail = $user->email;
+    Profile::create([
+        'user_id' => $user->id,
+        'cpf' => '12345678909',
+    ]);
 
-    $response = $this
-        ->actingAs($user)
-        ->patch('/profile', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+    Sanctum::actingAs($user);
+
+    $response = $this->putJson('/api/v1/user/basic-info', [
+        'name' => 'Test User',
+        'email' => $originalEmail,
+    ]);
 
     $response
-        ->assertSessionHasNoErrors()
-        ->assertRedirect('/profile');
+        ->assertOk()
+        ->assertJsonPath('data.user.name', 'Test User');
 
     $user->refresh();
 
     $this->assertSame('Test User', $user->name);
-    $this->assertSame('test@example.com', $user->email);
-    $this->assertNull($user->email_verified_at);
+    $this->assertSame($originalEmail, $user->email);
+    $this->assertNotNull($user->email_verified_at);
 });
 
-test('email verification status is unchanged when the email address is unchanged', function () {
+test('user can deactivate their account via api', function () {
     $user = User::factory()->create();
 
-    $response = $this
-        ->actingAs($user)
-        ->patch('/profile', [
-            'name' => 'Test User',
-            'email' => $user->email,
-        ]);
+    Sanctum::actingAs($user);
 
-    $response
-        ->assertSessionHasNoErrors()
-        ->assertRedirect('/profile');
+    $response = $this->postJson('/api/v1/user/deactivate');
 
-    $this->assertNotNull($user->refresh()->email_verified_at);
+    $response->assertOk();
+
+    $this->assertFalse((bool) $user->fresh()->is_active);
 });
 
-test('user can delete their account', function () {
+test('user can delete their account via api', function () {
     $user = User::factory()->create();
 
-    $response = $this
-        ->actingAs($user)
-        ->delete('/profile', [
-            'password' => 'password',
-        ]);
+    Sanctum::actingAs($user);
 
-    $response
-        ->assertSessionHasNoErrors()
-        ->assertRedirect('/');
+    $response = $this->deleteJson('/api/v1/user/delete');
 
-    $this->assertGuest();
-    $this->assertNull($user->fresh());
-});
+    $response->assertOk();
 
-test('correct password must be provided to delete account', function () {
-    $user = User::factory()->create();
-
-    $response = $this
-        ->actingAs($user)
-        ->from('/profile')
-        ->delete('/profile', [
-            'password' => 'wrong-password',
-        ]);
-
-    $response
-        ->assertSessionHasErrorsIn('userDeletion', 'password')
-        ->assertRedirect('/profile');
-
-    $this->assertNotNull($user->fresh());
+    $this->assertNotNull($user->fresh()->deleted_at);
 });

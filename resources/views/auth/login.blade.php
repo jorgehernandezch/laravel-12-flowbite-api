@@ -25,6 +25,7 @@
                             name="password" 
                             :errors="$errors" 
                             label="Password" 
+                            type="password"
                             placeholder="••••••••"
                             icon="fa-lock"
                             styles="w-full"
